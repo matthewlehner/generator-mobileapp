@@ -19,7 +19,7 @@
     "url":  "git://github.com/matthewlehner/generator-mobileapp.git"
   },
   "scripts": {
-    " test": "mocha --reporter spec"
+    "test": "mocha --reporter spec"
   },
   "dependencies": {
     "yeoman-generator": "~0.10.4"
