@@ -30,6 +30,7 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 
   this.includeRequireJS = false;
+  this.compassBootstrap = false;
 };
 
 util.inherits(AppGenerator, yeoman.generators.NamedBase);
@@ -49,7 +50,7 @@ AppGenerator.prototype.git = function git() {
 
 AppGenerator.prototype.bower = function() {
   this.copy('bowerrc', '.bowerrc');
-  this.copy('_component.json', 'component.json');
+  this.template('_component.json', 'component.json');
 };
 
 AppGenerator.prototype.jshint = function jshint() {
@@ -61,7 +62,7 @@ AppGenerator.prototype.editorConfig = function editorConfig() {
 };
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
-  this.write('app/styles/main.css', 'body {\n    background: #FAFAFA;\n}');
+  this.write('app/styles/main.scss', 'body {\n    background: #FAFAFA;\n}');
 };
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
