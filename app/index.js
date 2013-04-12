@@ -66,6 +66,10 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
 };
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
+  if (this.includeRequireJS) {
+    return;
+  }
+
   // prepare default content text
   var defaults = ['Zepto', 'Backbone'];
 
@@ -76,20 +80,20 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     '          <ul>'
   ];
 
-  if (!this.includeRequireJS) {
-    this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
-      'components/zepto/zept.js',
-      'scripts/main.js'
-    ]);
+  // this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
+  //   'components/zepto/zepto.js',
+  //   'scripts/main.js'
+  // ]);
 
-    this.indexFile = this.appendFiles({
-      html: this.indexFile,
-      fileType: 'js',
-      optimizedPath: 'scripts/coffee.js',
-      sourceFileList: ['scripts/hello.js'],
-      searchPath: '.tmp'
-    });
-  }
+  this.indexFile = this.appendFiles({
+    html: this.indexFile,
+    fileType: 'js',
+    optimizedPath: 'scripts/coffee.js',
+    sourceFileList: ['scripts/hello.js'],
+    searchPath: '.tmp'
+  });
+
+  this.mainJsFile = 'console.log(\'\\\'Allo \\\'Allo!\');';
 
   defaults.forEach(function (el) {
     contentText.push('            <li>' + el +'</li>');
