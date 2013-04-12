@@ -33,9 +33,9 @@ describe('Mobileapp generator test', function () {
       'Gruntfile.js',
       // 'app/404.html',
       // 'app/favicon.ico',
-      'app/index.html',
+      ['app/index.html', /!doctype html/],
       'app/scripts/hello.coffee',
-      'app/scripts/main.js',
+      ['app/scripts/main.js', /Allo/],
       'app/styles/main.scss'
     ];
 
