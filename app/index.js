@@ -69,7 +69,7 @@ AppGenerator.prototype.jstTemplates = function jstTemplates() {
 AppGenerator.prototype.writeIndex = function writeIndex() {
 
   // prepare default content text
-  var defaults = ['jQuery', 'Backbone.js', 'Underscore.js', 'RequireJS'];
+  var defaults = ['jQuery', 'Backbone.js', 'Lo-Dash', 'RequireJS'];
   var contentText = [
     '        <div>',
     '          <h1>\'Allo, \'Allo!</h1>',
@@ -143,9 +143,12 @@ AppGenerator.prototype.mainJs = function mainJs() {
 AppGenerator.prototype.app = function app() {
   this.mkdir('app');
   this.mkdir('app/scripts');
+  this.mkdir('app/scripts/models');
+  this.mkdir('app/scripts/views');
+  this.mkdir('app/scripts/collections');
+  this.mkdir('app/scripts/templates');
   this.mkdir('app/styles');
   this.mkdir('app/images');
   this.write('app/index.html', this.indexFile);
-  //this.write('app/scripts/main.js', this.mainJsFile);
   this.write('app/scripts/hello.coffee', this.mainCoffeeFile);
 };
