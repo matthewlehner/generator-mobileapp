@@ -29,8 +29,7 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 
-  this.includeRequireJS = false;
-  this.compassBootstrap = false;
+  this.includeRequireJS = true;
 };
 
 util.inherits(AppGenerator, yeoman.generators.NamedBase);
@@ -50,7 +49,7 @@ AppGenerator.prototype.git = function git() {
 
 AppGenerator.prototype.bower = function() {
   this.copy('bowerrc', '.bowerrc');
-  this.template('_component.json', 'component.json');
+  this.copy('_component.json', 'component.json');
 };
 
 AppGenerator.prototype.jshint = function jshint() {
@@ -66,12 +65,12 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
 };
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
-  if (this.includeRequireJS) {
+  if (!this.includeRequireJS) {
     return;
   }
-
   // prepare default content text
-  var defaults = ['Zepto', 'Backbone'];
+  var defaults = ['jQuery', 'Backbone.js', 'Underscore.js', 'RequireJS'];
+
 
   var contentText = [
     '        <div>',
@@ -79,11 +78,6 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     '          <p>You now have</p>',
     '          <ul>'
   ];
-
-  // this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
-  //   'components/zepto/zepto.js',
-  //   'scripts/main.js'
-  // ]);
 
   this.indexFile = this.appendFiles({
     html: this.indexFile,
@@ -93,7 +87,9 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     searchPath: '.tmp'
   });
 
-  this.mainJsFile = 'console.log(\'\\\'Allo \\\'Allo!\');';
+  this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
+    'components/requirejs/require.js'
+  ], {'data-main': 'scripts/main'});
 
   defaults.forEach(function (el) {
     contentText.push('            <li>' + el +'</li>');
@@ -108,6 +104,42 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   ]);
 
   this.indexFile = this.indexFile.replace('<body>', '<body>\n'+ contentText.join('\n'));
+};
+
+Generator.prototype.mainJs = function mainJs() {
+
+  var mainJsFile = [
+    '/*global require*/',
+    '\'use strict\';',
+    '',
+    'require.config({',
+    '    shim: {',
+    '        underscore: {',
+    '            exports: \'_\'',
+    '        },',
+    '        backbone: {',
+    '            deps: [',
+    '                \'underscore\',',
+    '                \'jquery\'',
+    '            ],',
+    '            exports: \'Backbone\'',
+    '        },',
+    '      },',
+    '    paths: {',
+    '        jquery: \'../components/jquery/jquery\',',
+    '        backbone: \'../components/backbone-amd/backbone\',',
+    '        underscore: \'../components/underscore-amd/underscore\''
+    '    }',
+    '});'
+    '',
+    'require([',
+    '    \'backbone\'',
+    '], function (Backbone) {',
+    '    Backbone.history.start();',
+    '});'
+  ];
+
+  this.write('app/scripts/main.js', mainJsFile.join('\n'));
 };
 
 AppGenerator.prototype.app = function app() {
