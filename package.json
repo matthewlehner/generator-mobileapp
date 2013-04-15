@@ -1,6 +1,6 @@
 {
   "name": "generator-mobileapp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Matthew Lehner <matthewlehner@gmail.com",
   "description": "Yeoman generator for scaffolding out a front-end webapp for mobile platforms",
   "keywords": [
