@@ -32,10 +32,10 @@ module.exports = function (grunt) {
                 files: ['test/spec/{,*/}*.coffee'],
                 tasks: ['coffee:test']
             },
-            // compass: {
-            //     files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-            //     tasks: ['compass:server']
-            // },
+            compass: {
+                files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+                tasks: ['compass:server']
+            },
             livereload: {
                 files: [
                     '<%%= yeoman.app %>/*.html',
@@ -140,23 +140,23 @@ module.exports = function (grunt) {
                 }]
             }
         },
-        // compass: {
-        //     options: {
-        //         sassDir: '<%%= yeoman.app %>/styles',
-        //         cssDir: '.tmp/styles',
-        //         imagesDir: '<%%= yeoman.app %>/images',
-        //         javascriptsDir: '<%%= yeoman.app %>/scripts',
-        //         fontsDir: '<%%= yeoman.app %>/styles/fonts',
-        //         importPath: 'app/components',
-        //         relativeAssets: true
-        //     },
-        //     dist: {},
-        //     server: {
-        //         options: {
-        //             debugInfo: true
-        //         }
-        //     }
-        // },
+        compass: {
+            options: {
+                sassDir: '<%%= yeoman.app %>/styles',
+                cssDir: '.tmp/styles',
+                imagesDir: '<%%= yeoman.app %>/images',
+                javascriptsDir: '<%%= yeoman.app %>/scripts',
+                fontsDir: '<%%= yeoman.app %>/styles/fonts',
+                importPath: 'app/components',
+                relativeAssets: true
+            },
+            dist: {},
+            server: {
+                options: {
+                    debugInfo: true
+                }
+            }
+        },
         // not used since Uglify task does concat,
         // but still available if needed
         /*concat: {
