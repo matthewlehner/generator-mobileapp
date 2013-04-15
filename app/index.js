@@ -28,8 +28,6 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
   // });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
-
-  this.includeRequireJS = true;
 };
 
 util.inherits(AppGenerator, yeoman.generators.NamedBase);
@@ -65,13 +63,10 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
 };
 
 AppGenerator.prototype.jstTemplates = function jstTemplates() {
-  this.copy('templates.js', 'app/scripts/templates.js')
+  this.copy('templates.js', 'app/scripts/templates.js');
 };
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
-  if (!this.includeRequireJS) {
-    return;
-  }
 
   // prepare default content text
   var defaults = ['jQuery', 'Backbone.js', 'Underscore.js', 'RequireJS'];
@@ -91,7 +86,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   // });
 
   this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
-    'components/requirejs/require.js',
+    'components/requirejs/require.js'
   ], {'data-main': 'scripts/main'});
 
   defaults.forEach(function (el) {
