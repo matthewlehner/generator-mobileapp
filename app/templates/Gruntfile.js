@@ -161,7 +161,7 @@ module.exports = function (grunt) {
         // but still available if needed
         /*concat: {
             dist: {}
-        },*/<% if (includeRequireJS) { %>
+        },*/
         requirejs: {
             dist: {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
@@ -180,13 +180,7 @@ module.exports = function (grunt) {
                     //uglify2: {} // https://github.com/mishoo/UglifyJS2
                 }
             }
-        },<% } else { %>
-        // not enabled since usemin task does concat and uglify
-        // check index.html to edit your build targets
-        // enable this task if you prefer defining your build targets here
-        /*uglify: {
-            dist: {}
-        },*/<% } %>
+        },
         rev: {
             dist: {
                 files: {
@@ -296,12 +290,12 @@ module.exports = function (grunt) {
                 'svgmin',
                 'htmlmin'
             ]
-        }<% if (includeRequireJS) { %>,
+        },
         bower: {
             all: {
                 rjsConfig: '<%%= yeoman.app %>/scripts/main.js'
             }
-        }<% } %>
+        }
     });
 
     grunt.renameTask('regarde', 'watch');
@@ -331,8 +325,8 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
-        'concurrent:dist',<% if (includeRequireJS) { %>
-        'requirejs',<% } %>
+        'concurrent:dist',
+        'requirejs',
         'cssmin',
         'concat',
         'uglify',
