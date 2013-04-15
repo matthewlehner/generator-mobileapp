@@ -68,10 +68,9 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   if (!this.includeRequireJS) {
     return;
   }
+
   // prepare default content text
   var defaults = ['jQuery', 'Backbone.js', 'Underscore.js', 'RequireJS'];
-
-
   var contentText = [
     '        <div>',
     '          <h1>\'Allo, \'Allo!</h1>',
@@ -126,8 +125,8 @@ AppGenerator.prototype.mainJs = function mainJs() {
     '      },',
     '    paths: {',
     '      jquery: \'../components/jquery/jquery\',',
-    '      backbone: \'../components/backbone-amd/backbone\',',
-    '      underscore: \'../components/underscore-amd/underscore\'',
+    '      backbone: \'../components/backbone/backbone\',',
+    '      underscore: \'../components/underscore/underscore\'',
     '    }',
     '});',
     '',
@@ -144,7 +143,6 @@ AppGenerator.prototype.mainJs = function mainJs() {
 AppGenerator.prototype.app = function app() {
   this.mkdir('app');
   this.mkdir('app/scripts');
-  this.mkdir('app/scripts/vendor/');
   this.mkdir('app/styles');
   this.mkdir('app/images');
   this.write('app/index.html', this.indexFile);
