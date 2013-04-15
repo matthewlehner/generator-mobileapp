@@ -6,5 +6,5 @@ before_script:
   npm install -g bower
 
 branches:
-  only:
-    - master
+  except:
+    - dev
