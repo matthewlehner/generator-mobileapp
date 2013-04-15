@@ -79,16 +79,16 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     '          <ul>'
   ];
 
-  this.indexFile = this.appendFiles({
-    html: this.indexFile,
-    fileType: 'js',
-    optimizedPath: 'scripts/coffee.js',
-    sourceFileList: ['scripts/hello.js'],
-    searchPath: '.tmp'
-  });
+  // this.indexFile = this.appendFiles({
+  //   html: this.indexFile,
+  //   fileType: 'js',
+  //   optimizedPath: 'scripts/coffee.js',
+  //   sourceFileList: ['scripts/hello.js'],
+  //   searchPath: '.tmp'
+  // });
 
   this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
-    'components/requirejs/require.js'
+    'components/requirejs/require.js',
   ], {'data-main': 'scripts/main'});
 
   defaults.forEach(function (el) {
@@ -106,8 +106,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   this.indexFile = this.indexFile.replace('<body>', '<body>\n'+ contentText.join('\n'));
 };
 
-Generator.prototype.mainJs = function mainJs() {
-
+AppGenerator.prototype.mainJs = function mainJs() {
   var mainJsFile = [
     '/*global require*/',
     '\'use strict\';',
@@ -126,11 +125,11 @@ Generator.prototype.mainJs = function mainJs() {
     '        },',
     '      },',
     '    paths: {',
-    '        jquery: \'../components/jquery/jquery\',',
-    '        backbone: \'../components/backbone-amd/backbone\',',
-    '        underscore: \'../components/underscore-amd/underscore\''
+    '      jquery: \'../components/jquery/jquery\',',
+    '      backbone: \'../components/backbone-amd/backbone\',',
+    '      underscore: \'../components/underscore-amd/underscore\'',
     '    }',
-    '});'
+    '});',
     '',
     'require([',
     '    \'backbone\'',
@@ -145,9 +144,10 @@ Generator.prototype.mainJs = function mainJs() {
 AppGenerator.prototype.app = function app() {
   this.mkdir('app');
   this.mkdir('app/scripts');
+  this.mkdir('app/scripts/vendor/');
   this.mkdir('app/styles');
   this.mkdir('app/images');
   this.write('app/index.html', this.indexFile);
-  this.write('app/scripts/main.js', this.mainJsFile);
+  //this.write('app/scripts/main.js', this.mainJsFile);
   this.write('app/scripts/hello.coffee', this.mainCoffeeFile);
 };
