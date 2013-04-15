@@ -62,8 +62,8 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
   this.write('app/styles/main.scss', 'body {\n    background: #FAFAFA;\n}');
 };
 
-AppGenerator.prototype.jstTemplates = function jstTemplates() {
-  this.copy('templates.js', 'app/scripts/templates.js');
+AppGenerator.prototype.appJs = function appJs() {
+  this.copy('app.js', 'app/scripts/app.js');
 };
 
 AppGenerator.prototype.baseRouter = function baseRouter() {
@@ -72,6 +72,10 @@ AppGenerator.prototype.baseRouter = function baseRouter() {
 
 AppGenerator.prototype.mainJs = function mainJs() {
   this.copy('main.js', 'app/scripts/main.js');
+};
+
+AppGenerator.prototype.configJs = function configJs() {
+  this.copy('config.js', 'app/scripts/config.js');
 };
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
@@ -102,42 +106,6 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   ]);
 
   this.indexFile = this.indexFile.replace('<body>', '<body>\n'+ contentText.join('\n'));
-};
-
-AppGenerator.prototype.configJs = function configJs() {
-  this.copy('config.js', 'app/scripts/config.js');
-
-  // var configJsFile = [
-  //   '/*global require*/',
-  //   '\'use strict\';',
-  //   '',
-  //   'require.config({',
-  //   '  deps: ["main"],',
-  //   '',
-  //   '  paths: {',
-  //   '    jquery: \'../components/jquery/jquery\',',
-  //   '    backbone: \'../components/backbone/backbone\',',
-  //   '    lodash: \'../components/lodash/lodash\'',
-  //   '  },',
-  //   '',
-  //   '  map: {',
-  //   '    // Ensure Lo-Dash is used instead of underscore.',
-  //   '    "*": { "underscore": "lodash" }',
-  //   '  },',
-  //   '',
-  //   '  shim: {',
-  //   '    backbone: {',
-  //   '      deps: [',
-  //   '          \'underscore\',',
-  //   '          \'jquery\'',
-  //   '      ],',
-  //   '      exports: \'Backbone\'',
-  //   '    },',
-  //   '  }',
-  //   '});'
-  // ];
-
-  // this.write('app/scripts/config.js', configJsFile.join('\n'));
 };
 
 AppGenerator.prototype.app = function app() {
