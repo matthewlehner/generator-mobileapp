@@ -85,9 +85,9 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   //   searchPath: '.tmp'
   // });
 
-  this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
+  this.indexFile = this.appendScripts(this.indexFile, 'scripts/config.js', [
     'components/requirejs/require.js'
-  ], {'data-main': 'scripts/main'});
+  ], {'data-main': 'scripts/config'});
 
   defaults.forEach(function (el) {
     contentText.push('            <li>' + el +'</li>');
@@ -104,21 +104,25 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   this.indexFile = this.indexFile.replace('<body>', '<body>\n'+ contentText.join('\n'));
 };
 
-AppGenerator.prototype.mainJs = function mainJs() {
-  var mainJsFile = [
+AppGenerator.prototype.configJs = function configJs() {
+  var configJsFile = [
     '/*global require*/',
     '\'use strict\';',
     '',
     'require.config({',
+    '  deps: ["main"],',
+    '',
     '  paths: {',
     '    jquery: \'../components/jquery/jquery\',',
     '    backbone: \'../components/backbone/backbone\',',
     '    lodash: \'../components/lodash/lodash\'',
     '  },',
+    '',
     '  map: {',
     '    // Ensure Lo-Dash is used instead of underscore.',
     '    "*": { "underscore": "lodash" }',
     '  },',
+    '',
     '  shim: {',
     '    backbone: {',
     '      deps: [',
@@ -128,8 +132,15 @@ AppGenerator.prototype.mainJs = function mainJs() {
     '      exports: \'Backbone\'',
     '    },',
     '  }',
-    '});',
-    '',
+    '});'
+  ];
+
+  this.write('app/scripts/config.js', configJsFile.join('\n'));
+};
+
+
+AppGenerator.prototype.mainJs = function mainJs() {
+  var mainJsFile = [
     'require([',
     '    \'backbone\'',
     '], function (Backbone) {',
