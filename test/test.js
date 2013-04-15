@@ -36,6 +36,7 @@ describe('Mobileapp generator test', function () {
       ['app/index.html', /!doctype html/],
       'app/scripts/hello.coffee',
       'app/scripts/main.js',
+      'app/scripts/templates.js',
       'app/styles/main.scss'
     ];
 

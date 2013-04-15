@@ -64,6 +64,10 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
   this.write('app/styles/main.scss', 'body {\n    background: #FAFAFA;\n}');
 };
 
+AppGenerator.prototype.jstTemplates = function jstTemplates() {
+  this.copy('templates.js', 'app/scripts/templates.js')
+};
+
 AppGenerator.prototype.writeIndex = function writeIndex() {
   if (!this.includeRequireJS) {
     return;
