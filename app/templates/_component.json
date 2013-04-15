@@ -1,8 +1,8 @@
 {
   "name": "<%= _.slugify(appname) %>",
   "version": "0.0.0",
-  "dependencies": {<% if (includeRequireJS) { %>
-    "requirejs": "~2.1.4",<% } %>
+  "dependencies": {
+    "requirejs": "~2.1.4",
     "jquery": "~1.9.1",
     "lodash": "~1.1.1",
     "backbone": "~1.0.0"
