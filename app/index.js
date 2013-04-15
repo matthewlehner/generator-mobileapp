@@ -66,6 +66,14 @@ AppGenerator.prototype.jstTemplates = function jstTemplates() {
   this.copy('templates.js', 'app/scripts/templates.js');
 };
 
+AppGenerator.prototype.baseRouter = function baseRouter() {
+  this.copy('router.js', 'app/scripts/router.js');
+};
+
+AppGenerator.prototype.mainJs = function mainJs() {
+  this.copy('main.js', 'app/scripts/main.js');
+};
+
 AppGenerator.prototype.writeIndex = function writeIndex() {
 
   // prepare default content text
@@ -76,14 +84,6 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     '          <p>You now have</p>',
     '          <ul>'
   ];
-
-  // this.indexFile = this.appendFiles({
-  //   html: this.indexFile,
-  //   fileType: 'js',
-  //   optimizedPath: 'scripts/coffee.js',
-  //   sourceFileList: ['scripts/hello.js'],
-  //   searchPath: '.tmp'
-  // });
 
   this.indexFile = this.appendScripts(this.indexFile, 'scripts/config.js', [
     'components/requirejs/require.js'
@@ -105,50 +105,39 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 };
 
 AppGenerator.prototype.configJs = function configJs() {
-  var configJsFile = [
-    '/*global require*/',
-    '\'use strict\';',
-    '',
-    'require.config({',
-    '  deps: ["main"],',
-    '',
-    '  paths: {',
-    '    jquery: \'../components/jquery/jquery\',',
-    '    backbone: \'../components/backbone/backbone\',',
-    '    lodash: \'../components/lodash/lodash\'',
-    '  },',
-    '',
-    '  map: {',
-    '    // Ensure Lo-Dash is used instead of underscore.',
-    '    "*": { "underscore": "lodash" }',
-    '  },',
-    '',
-    '  shim: {',
-    '    backbone: {',
-    '      deps: [',
-    '          \'underscore\',',
-    '          \'jquery\'',
-    '      ],',
-    '      exports: \'Backbone\'',
-    '    },',
-    '  }',
-    '});'
-  ];
+  this.copy('config.js', 'app/scripts/config.js');
 
-  this.write('app/scripts/config.js', configJsFile.join('\n'));
-};
+  // var configJsFile = [
+  //   '/*global require*/',
+  //   '\'use strict\';',
+  //   '',
+  //   'require.config({',
+  //   '  deps: ["main"],',
+  //   '',
+  //   '  paths: {',
+  //   '    jquery: \'../components/jquery/jquery\',',
+  //   '    backbone: \'../components/backbone/backbone\',',
+  //   '    lodash: \'../components/lodash/lodash\'',
+  //   '  },',
+  //   '',
+  //   '  map: {',
+  //   '    // Ensure Lo-Dash is used instead of underscore.',
+  //   '    "*": { "underscore": "lodash" }',
+  //   '  },',
+  //   '',
+  //   '  shim: {',
+  //   '    backbone: {',
+  //   '      deps: [',
+  //   '          \'underscore\',',
+  //   '          \'jquery\'',
+  //   '      ],',
+  //   '      exports: \'Backbone\'',
+  //   '    },',
+  //   '  }',
+  //   '});'
+  // ];
 
-
-AppGenerator.prototype.mainJs = function mainJs() {
-  var mainJsFile = [
-    'require([',
-    '    \'backbone\'',
-    '], function (Backbone) {',
-    '    Backbone.history.start();',
-    '});'
-  ];
-
-  this.write('app/scripts/main.js', mainJsFile.join('\n'));
+  // this.write('app/scripts/config.js', configJsFile.join('\n'));
 };
 
 AppGenerator.prototype.app = function app() {

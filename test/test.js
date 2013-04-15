@@ -35,6 +35,7 @@ describe('Mobileapp generator test', function () {
       // 'app/favicon.ico',
       ['app/index.html', /!doctype html/],
       'app/scripts/hello.coffee',
+      'app/scripts/router.js',
       'app/scripts/main.js',
       ['app/scripts/config.js', /require.config/],
       'app/scripts/templates.js',
